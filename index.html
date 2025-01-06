@@ -1,0 +1,969 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Name</title>
+    <link rel="manifest" href="manifest.webmanifest">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card figcaption,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+.cards {
+  display: flex;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+.cards {
+  flex-flow: row wrap;
+}
+
+.cards .card {
+  margin: 20px;
+  width: 180px;
+  height: 270px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: 0.3s;
+}
+
+.cards .card img {
+  width: 100%;
+  min-height: 100%;
+}
+
+.cards .card figcaption {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #DDD;
+  transition: 0.3s;
+}
+
+#h2jscript {
+  cursor:pointer;
+}
+
+.cards .card:hover,
+.cards .card:focus,
+.cards .card:active {
+  box-shadow: 0 8px 16px 3px rgba(0,0,0,0.6);
+  transform: translateY(-3px) scale(1.05) rotateX(15deg);
+}
+
+.cards .card:hover figcaption,
+.cards .card:focus figcaption,
+.cards .card:active figcaption {
+  transform: none;
+}
+
+.cards .card:hover:after,
+.cards .card:focus:after,
+.cards .card:active:after {
+  transform: rotate(25deg);
+  top: -40%;
+  opacity: 0.15;
+}
+
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+/* unvisited link */
+a:link {
+  color: #ccc;
+}
+/* visited link */
+a:visited {
+  color: #ccc;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #ccc;
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#BackTopButton {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+
+#BackTopButton:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+input{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 300px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 1rem;
+}
+
+input:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+#searchbutton{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 175px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 2rem;
+}
+
+#searchbutton:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+    </style>
+   <script>
+	function search() {
+		var input, filter, games, game, cards, card, i, j, txtValue, wrapper, quicklinks, quicklink, quicklinkid, needhide, numvisible, quicklinklinks;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+
+		wrapper = document.getElementById("wrapper");
+		parentElement = wrapper.parentElement;
+		fragment = document.createDocumentFragment();
+		fragment.appendChild(wrapper.cloneNode(true));
+		wrapper.remove();
+		games = fragment.childNodes[0].getElementsByTagName("figcaption");
+		i = games.length - 1;
+		while (i >= 0) {
+			game = games[i];
+			txtValue = game.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				game.parentElement.parentElement.style.display = "";
+			} else {
+				game.parentElement.parentElement.style.display = "none";
+			}
+			i--;
+		}
+		
+		quicklinks = fragment.childNodes[0].querySelectorAll("div[id^='quicklink-']")
+		i = quicklinks.length - 1;
+		while (i >= 0) {
+			quicklink = quicklinks[i];
+			quicklinkid = quicklink.id;
+			cards = fragment.getElementById(quicklinkid.replace("quicklink-", ""));
+			needhide = true;
+			if(cards)
+			{
+			
+				j = cards.children.length -1
+				numvisible = 0;
+				while (j >= 0)
+				{
+					if (cards.children[j].style.display == "")
+					{
+						needhide = false;
+						numvisible++;
+					}
+					j--;
+				}
+				
+				quicklinklinks = fragment.childNodes[0].querySelectorAll("a[href=\"#" + quicklinkid.replace(/["\\]/g, '\\$&') + "\"]")
+				if (needhide)
+				{
+					quicklink.style.display = "none";
+					cards.style.display = "none";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BA;";
+						quicklink.children[0].children[0].style.color = "#790000";
+						quicklink.children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )"
+						quicklinklinks[0].style.display = "none";
+					}
+				} else {
+					quicklink.style.display = "";					
+					cards.style.display = "";
+					if (quicklinklinks.length == 1)
+					{
+						quicklink.children[0].children[0].innerHTML = "&#x25BC;";
+						quicklink.children[0].children[0].style.color = "#007962";
+						quicklink.children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )";
+						quicklinklinks[0].style.display = "";
+					}
+				}
+			}
+			i--;
+		}
+		
+		parentElement.appendChild(fragment.childNodes[0]);
+		
+		//have to renable this
+		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+		observer.observe();
+		
+		// Get the input field
+		var input = document.getElementById("search");
+
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) {
+		  // Number 13 is the "Enter" key on the keyboard
+		  if (event.keyCode === 13) {
+			// Cancel the default action, if needed
+			event.preventDefault();
+			// Trigger the button element with a click
+			document.getElementById("searchbutton").click();
+		  }
+		});
+	}
+  </script>
+  </head>
+  <body>
+    <button onclick="topFunction()" id="BackTopButton" title="Go to top">Top</button>
+    <div class="wrapper" id="wrapper">
+      <h2><strong>MAIN MENU - Name<span>(Not Grouped ascending / Name ascending)</span></strong></h2>
+      <div class="Menu"><a Class="MenuButton" href="index.html">Name ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_releaseyear_descending_name_ascending.html">Release Year ▼</A><a Class="MenuButton" href="default%20list%20text_favorite_ascending_name_ascending.html">Favorite ▲</A><a Class="MenuButton" href="default%20list%20text_completionstatus_ascending_name_ascending.html">Completion Status ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html">User Score ▼</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html">Category ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html">Release Date ▼</A></div>
+      <h2><strong>Search</strong></h2><input type="text" id="search" placeholder="Type in a game name to search"><br/><button onclick="search()" id="searchbutton">Search</button>
+      <h2><strong>Quick Links</strong></h2>
+	  <div class="quicklinks"><a class="quicklink" href="#quicklink-Not Grouped">Not Grouped</A></div>
+      <div id="quicklink-Not Grouped"><h2 id="h2jscript" onclick="ShowHide('Not Grouped')"><strong id="eye-Not Grouped" style="color: #007962;">&#x25BC;</strong><strong>Not Grouped<span>( 91 )</span></strong></h2></div>
+<div id="Not Grouped" class="cards">
+<figure class="card">
+  <a href="83981b02-7a1d-496d-a395-bb8f6220604d.html">
+  <img class="lozad" data-src="83981b02-7a1d-496d-a395-bb8f6220604d/abe98912-be62-45c1-8e5f-a65eaf50d9f5.jpg"/>
+  <figcaption>Amnesia: A Machine for Pigs</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6f7dfb4e-06fc-4583-8f3b-c286d5a62554.html">
+  <img class="lozad" data-src="6f7dfb4e-06fc-4583-8f3b-c286d5a62554/597468b8-20a1-4eb6-94e6-3c0a3f4af462.jpg"/>
+  <figcaption>Amnesia: Rebirth</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="301a4b1d-0931-4e24-a747-fee53339ef55.html">
+  <img class="lozad" data-src="301a4b1d-0931-4e24-a747-fee53339ef55/06bed3dc-a476-4d0f-a056-4a6993e479e5.jpg"/>
+  <figcaption>Amnesia: The Bunker</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9a89fba6-ab52-4cff-88da-7d7291eb9d2a.html">
+  <img class="lozad" data-src="9a89fba6-ab52-4cff-88da-7d7291eb9d2a/68976ad6-eb5a-40de-b544-7200cebe1e2b.jpg"/>
+  <figcaption>Amnesia: The Dark Descent</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="fea84536-1f44-449c-a1c8-fdd6a481fce3.html">
+  <img class="lozad" data-src="fea84536-1f44-449c-a1c8-fdd6a481fce3/ff6b2041-89ca-48af-ae2d-735af1dcf3a9.jpg"/>
+  <figcaption>Arma 3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ef0627f8-708d-41e6-9414-6c6a2c80ea98.html">
+  <img class="lozad" data-src="ef0627f8-708d-41e6-9414-6c6a2c80ea98/6a921736-4b33-4f49-9d0c-abae8296b1fc.jpg"/>
+  <figcaption>Assassin&#39;s Creed</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9c3477a3-c963-48b9-8f87-af8f8ec2150c.html">
+  <img class="lozad" data-src="9c3477a3-c963-48b9-8f87-af8f8ec2150c/9c0ff418-9a54-4b8b-b38d-79c5e9656e5f.jpg"/>
+  <figcaption>Assassin&#39;s Creed Brotherhood</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a037b8d7-4c62-4c03-be62-4649617723e3.html">
+  <img class="lozad" data-src="a037b8d7-4c62-4c03-be62-4649617723e3/060b98d3-e1d3-450f-bf2b-c20a3a10bd43.jpg"/>
+  <figcaption>Assassin&#39;s Creed II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="712594bc-6419-42be-8886-b5efd714b226.html">
+  <img class="lozad" data-src="712594bc-6419-42be-8886-b5efd714b226/b56166d2-fe3a-4475-b567-ec3784c41f33.jpg"/>
+  <figcaption>Assassin&#39;s Creed III</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="563579cd-4662-4144-8833-b53eef539718.html">
+  <img class="lozad" data-src="563579cd-4662-4144-8833-b53eef539718/0f2400ad-8882-494f-855e-b3380111a96a.jpg"/>
+  <figcaption>Assassin&#39;s Creed IV Black Flag</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6cf7dfad-1bb6-4155-94b0-993bf0d0bc58.html">
+  <img class="lozad" data-src="6cf7dfad-1bb6-4155-94b0-993bf0d0bc58/6e80e389-f178-4322-963a-9caed7637153.jpg"/>
+  <figcaption>Assassin&#39;s Creed Origins</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a1b7e0c9-5cad-492b-aa16-7456f5fdcdc1.html">
+  <img class="lozad" data-src="a1b7e0c9-5cad-492b-aa16-7456f5fdcdc1/ec8a716b-eabf-4795-97bd-c4ba00c33235.jpg"/>
+  <figcaption>Assassin&#39;s Creed Revelations</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="26b657f9-0d79-4dc2-aba4-78f7acfe7e45.html">
+  <img class="lozad" data-src="26b657f9-0d79-4dc2-aba4-78f7acfe7e45/6eb315fd-dcd0-43bf-8aeb-ee3e1a0429c2.jpg"/>
+  <figcaption>Assassin&#39;s Creed Rogue</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ff7517d6-557f-4294-9105-a5e3819a0429.html">
+  <img class="lozad" data-src="ff7517d6-557f-4294-9105-a5e3819a0429/87d49017-5f6c-40e6-93c5-2bd2627b849d.jpg"/>
+  <figcaption>Baba is You</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="06691aaa-9376-4f98-ae2e-95ad390060fc.html">
+  <img class="lozad" data-src="06691aaa-9376-4f98-ae2e-95ad390060fc/a50f7e48-2f18-49fa-adfc-9ba67676a23c.jpg"/>
+  <figcaption>Beyond Good &amp; Evil</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="eb69424c-45b4-412f-a08f-5595f2c41f4d.html">
+  <img class="lozad" data-src="eb69424c-45b4-412f-a08f-5595f2c41f4d/09c5f28e-de17-4e7a-9851-5b88c3b469e9.jpg"/>
+  <figcaption>Call of Duty 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0832c587-10dc-4a13-905f-9b2a6ce107f0.html">
+  <img class="lozad" data-src="0832c587-10dc-4a13-905f-9b2a6ce107f0/232d350c-efb5-4072-a0ba-a4e4d8c8229d.jpg"/>
+  <figcaption>Call of Duty 4: Modern Warfare</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f4ee0328-b9bf-467b-a114-421c3564cb38.html">
+  <img class="lozad" data-src="f4ee0328-b9bf-467b-a114-421c3564cb38/bb854d3b-525c-4f49-acf5-4b30872a0254.jpg"/>
+  <figcaption>Call of Duty: Black Ops</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="bc22b628-5239-438b-b881-c26c896a00cc.html">
+  <img class="lozad" data-src="bc22b628-5239-438b-b881-c26c896a00cc/b1ac9d02-769a-4011-9e06-11caf348e2af.jpg"/>
+  <figcaption>Call of Duty: Black Ops II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="587954d3-e38e-4d25-a956-5cfeaabe782e.html">
+  <img class="lozad" data-src="587954d3-e38e-4d25-a956-5cfeaabe782e/94f9f42b-ef05-484a-bb55-09fd5877c977.jpg"/>
+  <figcaption>Call of Duty: Black Ops III</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c8b55542-7a07-4091-b59d-91728e6b72f3.html">
+  <img class="lozad" data-src="c8b55542-7a07-4091-b59d-91728e6b72f3/974131b6-f498-412f-8d7c-77c3d70f4484.jpg"/>
+  <figcaption>Call of Duty: Infinite Warfare</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3ee3b8a7-4bdd-41a0-994e-38c155c3c72a.html">
+  <img class="lozad" data-src="3ee3b8a7-4bdd-41a0-994e-38c155c3c72a/3533f427-8934-415c-bb30-07dede297935.jpg"/>
+  <figcaption>Call of Duty: Modern Warfare 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ae3bccf4-87cf-497f-adf4-3b1a453c1bb1.html">
+  <img class="lozad" data-src="ae3bccf4-87cf-497f-adf4-3b1a453c1bb1/6bc86642-7318-477d-b125-21f55e06409e.jpg"/>
+  <figcaption>Call of Duty: Modern Warfare 3</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c0cc33bc-3b8d-4939-97a4-4448dc28653d.html">
+  <img class="lozad" data-src="c0cc33bc-3b8d-4939-97a4-4448dc28653d/e7e98311-d8d0-4c89-a787-79292f4ff08d.jpg"/>
+  <figcaption>Call of Duty: World at War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1c509772-6337-4e8f-a1ab-2ad00c339653.html">
+  <img class="lozad" data-src="1c509772-6337-4e8f-a1ab-2ad00c339653/0c9ff8b3-3d3f-48fa-8263-17044270ca58.jpg"/>
+  <figcaption>Call of the Sea</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="9b4737b2-44c1-4062-b4d9-a5526574c1b3.html">
+  <img class="lozad" data-src="9b4737b2-44c1-4062-b4d9-a5526574c1b3/a22b869f-bc32-4db6-bc69-2d7769ae6f84.jpg"/>
+  <figcaption>Call to Arms: Gates of Hell - Ostfront</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="52548794-46c0-4c92-90e2-55de7b075e7d.html">
+  <img class="lozad" data-src="52548794-46c0-4c92-90e2-55de7b075e7d/29e41313-95a3-4dcd-b6b4-8a53a53d66a5.png"/>
+  <figcaption>Cyberpunk 2077</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="5302cece-ccde-46ad-9c4c-45a1c8ab2e5e.html">
+  <img class="lozad" data-src="5302cece-ccde-46ad-9c4c-45a1c8ab2e5e/abcda36a-bfb1-40d3-b08d-a0bb8507b1a8.jpg"/>
+  <figcaption>Demon&#39;s Souls</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="2ce985fc-7490-425e-b7c6-fb062536392a.html">
+  <img class="lozad" data-src="2ce985fc-7490-425e-b7c6-fb062536392a/95cbf2d2-09bf-4e8f-87eb-82295298e15b.jpg"/>
+  <figcaption>Derail Valley</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c989b6ce-2b26-471b-b0a2-ca2d8437eccf.html">
+  <img class="lozad" data-src="c989b6ce-2b26-471b-b0a2-ca2d8437eccf/5abf8375-26ee-4323-91c7-91c680773d52.jpg"/>
+  <figcaption>Detroit: Become Human</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="83889b13-e916-4f6c-8ea6-c4cc8fc2a716.html">
+  <img class="lozad" data-src="83889b13-e916-4f6c-8ea6-c4cc8fc2a716/7bb218d8-14a6-4a2f-ba10-d5faedbb6d2a.jpg"/>
+  <figcaption>Dishonored</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="49a6f469-d63b-4f0d-a1a0-8b97952b6b46.html">
+  <img class="lozad" data-src="49a6f469-d63b-4f0d-a1a0-8b97952b6b46/b4a3cf14-fd66-4e18-b4cc-4e44b34aafdc.jpg"/>
+  <figcaption>Dishonored 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="5fdbb9fe-3133-449c-a8f7-df177592bed4.html">
+  <img class="lozad" data-src="5fdbb9fe-3133-449c-a8f7-df177592bed4/15a1d188-fd2e-4573-9b81-c190153e87b2.jpg"/>
+  <figcaption>Dishonored: Death of the Outsider</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="62faa2f5-5b41-4f7e-affa-2ba7a7a093c8.html">
+  <img class="lozad" data-src="62faa2f5-5b41-4f7e-affa-2ba7a7a093c8/d2e3edcb-0dbe-4474-9654-79b47b6adf63.jpg"/>
+  <figcaption>Dragon Age: Origins</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b5a86cfe-2cfd-4e12-917e-a5b2f67b7c40.html">
+  <img class="lozad" data-src="b5a86cfe-2cfd-4e12-917e-a5b2f67b7c40/ec86c2aa-e382-4ea0-86ac-ae2efb54a188.jpg"/>
+  <figcaption>Euro Truck Simulator 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="7c674148-b4bb-4a84-8a80-6b51e58a387b.html">
+  <img class="lozad" data-src="7c674148-b4bb-4a84-8a80-6b51e58a387b/130107ad-d7bc-46fc-aa76-f9511295674a.jpg"/>
+  <figcaption>Ghost of Tsushima</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ffc5cfd4-3585-460e-b7c7-83dfef31ac52.html">
+  <img class="lozad" data-src="ffc5cfd4-3585-460e-b7c7-83dfef31ac52/70b23ae5-8fe3-4470-a5df-602f6c242278.jpg"/>
+  <figcaption>God of War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="2c498945-0913-4bbd-9dba-b97513effdb9.html">
+  <img class="lozad" data-src="2c498945-0913-4bbd-9dba-b97513effdb9/2116c3c5-9419-4795-b221-aa6116bd2716.jpg"/>
+  <figcaption>God of War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e2614c93-6ab0-47c4-869a-2f5ce07a08be.html">
+  <img class="lozad" data-src="e2614c93-6ab0-47c4-869a-2f5ce07a08be/bb9eb7d9-c0b5-4c6c-be07-4203bb15c05b.jpg"/>
+  <figcaption>God of War II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="35ed00c6-3757-4345-8d09-3ee7031bb4a2.html">
+  <img class="lozad" data-src="35ed00c6-3757-4345-8d09-3ee7031bb4a2/a4b3e257-5a92-49f2-bdfe-ebe3c51dcd17.jpg"/>
+  <figcaption>God of War III</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="077f2e81-0c39-4278-8463-ce78293b351e.html">
+  <img class="lozad" data-src="077f2e81-0c39-4278-8463-ce78293b351e/770d957d-7015-4e54-b3da-13bb404f951a.jpg"/>
+  <figcaption>God of War: Ascension</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="76562ef9-8d42-4579-b738-796fa37d9455.html">
+  <img class="lozad" data-src="76562ef9-8d42-4579-b738-796fa37d9455/6adab323-4363-4c1b-8159-e88728ceb080.jpg"/>
+  <figcaption>God of War: Chains of Olympus</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6e3e9167-8911-4e7c-93e1-2e666e476abc.html">
+  <img class="lozad" data-src="6e3e9167-8911-4e7c-93e1-2e666e476abc/abb29dcb-2aea-471c-9c23-f0e313919925.jpg"/>
+  <figcaption>God of War: Ghost of Sparta</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ab556156-5874-452f-ad52-ec1bba3da899.html">
+  <img class="lozad" data-src="ab556156-5874-452f-ad52-ec1bba3da899/6eba5fd8-b04d-4f5d-acf1-12823e2efe47.jpg"/>
+  <figcaption>Hitman 2: Silent Assassin</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="959ef2ae-cb8b-47c0-8087-fc9a82473731.html">
+  <img class="lozad" data-src="959ef2ae-cb8b-47c0-8087-fc9a82473731/2d2a047d-ff3f-41f3-a83f-8e43e6234e44.jpg"/>
+  <figcaption>Hitman World of Assassination</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3ba52599-6d9c-4e6c-9f2f-47ed54e67860.html">
+  <img class="lozad" data-src="3ba52599-6d9c-4e6c-9f2f-47ed54e67860/63304a8a-c8cb-41b6-9b3d-66b6eec4d47e.jpg"/>
+  <figcaption>Hitman: Absolution</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d5a32ad1-2d96-4df7-9409-8eb85decaa91.html">
+  <img class="lozad" data-src="d5a32ad1-2d96-4df7-9409-8eb85decaa91/b0f75d58-f1cf-4364-a199-36b5b8f7b478.jpg"/>
+  <figcaption>Hitman: Blood Money</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="7c0911b7-fcfb-4cf9-b8d1-b440b1b8cbb5.html">
+  <img class="lozad" data-src="7c0911b7-fcfb-4cf9-b8d1-b440b1b8cbb5/b3bddb6a-65cf-4800-b8e8-221fb1f2694e.jpg"/>
+  <figcaption>Hitman: Codename 47</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1606274a-f4dd-4908-9c03-f9876ed8033d.html">
+  <img class="lozad" data-src="1606274a-f4dd-4908-9c03-f9876ed8033d/6a1b28c8-425e-4926-8a54-22084666abd0.jpg"/>
+  <figcaption>Hitman: Contracts</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6cc309e2-1217-4e10-8553-a6e8b36734b6.html">
+  <img class="lozad" data-src="6cc309e2-1217-4e10-8553-a6e8b36734b6/85ebc944-2979-4d20-8279-a40569e9b1a5.jpg"/>
+  <figcaption>Jusant</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a28423e0-1521-42a2-917d-571587df0144.html">
+  <img class="lozad" data-src="a28423e0-1521-42a2-917d-571587df0144/77c0951f-58dc-4190-8799-e74f4c213e3a.jpg"/>
+  <figcaption>LoveChoice</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="7d184380-daf8-4f8a-a9f2-4f9b13ef8b3e.html">
+  <img class="lozad" data-src="7d184380-daf8-4f8a-a9f2-4f9b13ef8b3e/39b71f00-0f21-488c-9a0f-e09d7547be52.jpg"/>
+  <figcaption>Mass Effect Legendary Edition</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="013d9ff3-d8d7-4bda-9300-0e813565a086.html">
+  <img class="lozad" data-src="013d9ff3-d8d7-4bda-9300-0e813565a086/e1d76d73-3b49-4955-b7e2-d1eb54bb2796.jpg"/>
+  <figcaption>Medieval II: Total War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="4d0889e1-2412-43bf-a7f9-bcc73c8a4267.html">
+  <img class="lozad" data-src="4d0889e1-2412-43bf-a7f9-bcc73c8a4267/d10f4e08-8cc4-4e58-962d-c1a7e691ad52.jpg"/>
+  <figcaption>Metal Gear Solid 3: Snake Eater</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="459187e7-ab64-4094-9f06-ce2ff3ce8de5.html">
+  <img class="lozad" data-src="459187e7-ab64-4094-9f06-ce2ff3ce8de5/fa637332-ec19-40f4-9708-1554f449b4c1.jpg"/>
+  <figcaption>Middle-earth: Shadow of Mordor</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3350dcac-bc3d-4c88-a071-33bd65115685.html">
+  <img class="lozad" data-src="3350dcac-bc3d-4c88-a071-33bd65115685/2ba1094a-4f22-4b16-bff3-7b224f97f731.jpg"/>
+  <figcaption>Middle-earth: Shadow of War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="62e19244-a7e5-471e-93fa-d056229e03c6.html">
+  <img class="lozad" data-src="62e19244-a7e5-471e-93fa-d056229e03c6/962fe355-b611-481b-abef-232bdff63f4d.jpg"/>
+  <figcaption>Mount &amp; Blade: Warband</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="b5871b20-4192-4c54-9b05-da6349d0f5d1.html">
+  <img class="lozad" data-src="b5871b20-4192-4c54-9b05-da6349d0f5d1/e387887a-99bb-425e-8ced-36e6f91c24b6.jpg"/>
+  <figcaption>Napoleon: Total War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d56f986c-6155-454f-a52c-876f2de70f95.html">
+  <img class="lozad" data-src="d56f986c-6155-454f-a52c-876f2de70f95/2def5a48-d65d-486a-a193-7b556f230157.jpg"/>
+  <figcaption>Outlast</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f5fac8d6-b681-46a3-b430-4b20e0501b44.html">
+  <img class="lozad" data-src="f5fac8d6-b681-46a3-b430-4b20e0501b44/8e0fd583-9881-449d-bbdb-7c4ead5d59d2.jpg"/>
+  <figcaption>Outlast II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="1f942940-3908-4d52-b51a-2c75a1618eb4.html">
+  <img class="lozad" data-src="1f942940-3908-4d52-b51a-2c75a1618eb4/92c6668c-bfe1-4717-a554-85aa64941f2b.jpg"/>
+  <figcaption>Pentiment</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="36e0bc43-9e81-4b48-9f5c-47ae2dbf5b70.html">
+  <img class="lozad" data-src="36e0bc43-9e81-4b48-9f5c-47ae2dbf5b70/a313b637-b422-49cf-9969-88bd43add142.jpg"/>
+  <figcaption>pirates of the caribbean online</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="cef241ba-26a1-46ca-adfa-ec28b3db2bd1.html">
+  <img class="lozad" data-src="cef241ba-26a1-46ca-adfa-ec28b3db2bd1/e6bf9856-e6fb-47b3-892a-1e136507848f.jpg"/>
+  <figcaption>Portal</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="6e307735-13d8-425e-b6c7-38a9a1cbbef4.html">
+  <img class="lozad" data-src="6e307735-13d8-425e-b6c7-38a9a1cbbef4/10fb7a38-00e1-4483-9fd8-8c493183cefd.jpg"/>
+  <figcaption>Resident Evil</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c2ca6b20-5838-446c-ad3d-a4b8b86588ee.html">
+  <img class="lozad" data-src="c2ca6b20-5838-446c-ad3d-a4b8b86588ee/33638126-690d-43cb-adcf-73d067af8b39.jpg"/>
+  <figcaption>Resident Evil 0</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d2f446b8-ca5d-4f79-8c78-b3c19457fdc0.html">
+  <img class="lozad" data-src="d2f446b8-ca5d-4f79-8c78-b3c19457fdc0/38f5d855-b1e2-4aab-9d76-166c768707cf.jpg"/>
+  <figcaption>Resident Evil 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d4eabf1c-0ecb-4ea4-825c-ce801f731a35.html">
+  <img class="lozad" data-src="d4eabf1c-0ecb-4ea4-825c-ce801f731a35/e9f8241f-f792-4ecd-8193-d227df1cf8bd.jpg"/>
+  <figcaption>Resident Evil 4</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="2dea2748-d094-47c7-94a0-52c4bb6b42e8.html">
+  <img class="lozad" data-src="2dea2748-d094-47c7-94a0-52c4bb6b42e8/6ea7bcda-365d-4db7-a2a0-c3e26f84d3c4.jpg"/>
+  <figcaption>Resident Evil 5</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="343a92f1-8e81-4aa5-90e4-fc5254fdef35.html">
+  <img class="lozad" data-src="343a92f1-8e81-4aa5-90e4-fc5254fdef35/205ac529-03cb-409d-b5c2-7991b0e7c970.jpg"/>
+  <figcaption>Resident Evil 6</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="abf5aa7b-b277-4cd7-a777-9ada205c3131.html">
+  <img class="lozad" data-src="abf5aa7b-b277-4cd7-a777-9ada205c3131/a0bf8d9b-2138-4d05-b660-a92ea3d26db8.jpg"/>
+  <figcaption>Resident Evil 7: Biohazard</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="66b2f7b9-a23b-4f3e-a618-d648acc7bf53.html">
+  <img class="lozad" data-src="66b2f7b9-a23b-4f3e-a618-d648acc7bf53/9669353a-1db9-4ff0-99c6-e533913f0aa6.jpg"/>
+  <figcaption>Resident Evil Village</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="df55ab78-e80a-4fdf-90a4-e68ae7f59105.html">
+  <img class="lozad" data-src="df55ab78-e80a-4fdf-90a4-e68ae7f59105/76535f38-1eee-4988-a204-c97a7d36aaf1.jpg"/>
+  <figcaption>RiME</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="324240ed-631b-4d69-9d16-41c854e7bdb6.html">
+  <img class="lozad" data-src="324240ed-631b-4d69-9d16-41c854e7bdb6/ca2f7422-c650-48e9-a936-f2eee18db333.jpg"/>
+  <figcaption>Rome: Total War</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d3a98efd-3fe9-434c-b6f8-c79f445b48e3.html">
+  <img class="lozad" data-src="d3a98efd-3fe9-434c-b6f8-c79f445b48e3/fdeeede6-ec31-439d-bfd5-fc394b3d65cc.jpg"/>
+  <figcaption>S.T.A.L.K.E.R. Collection</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="419edef2-216b-41db-a73f-fb3d5e50c588.html">
+  <img class="lozad" data-src="419edef2-216b-41db-a73f-fb3d5e50c588/7f704027-d59d-4191-a33e-3758d5584eca.jpg"/>
+  <figcaption>SCORN</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a40934ff-5b15-4a5a-b599-e341ad0107c6.html">
+  <img class="lozad" data-src="a40934ff-5b15-4a5a-b599-e341ad0107c6/01eabcc4-a1ac-4013-bdb9-3fd9a8c55467.jpg"/>
+  <figcaption>Shadow of the Colossus</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a2025fb0-2aa3-4643-9da4-fdf4881ae8e3.html">
+  <img class="lozad" data-src="a2025fb0-2aa3-4643-9da4-fdf4881ae8e3/3e3ca6b4-805c-4d99-b081-4d872095950a.jpg"/>
+  <figcaption>Slay the Princess: The Pristine Cut</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="7f8ac379-533a-4039-b4fe-625de6e0000a.html">
+  <img class="lozad" data-src="7f8ac379-533a-4039-b4fe-625de6e0000a/1223cd28-f3de-47a5-94b8-cb6a5d6d8e83.jpg"/>
+  <figcaption>Soldiers: Heroes of World War II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="02400c46-41e5-4faf-a3f8-050f952b8a10.html">
+  <img class="lozad" data-src="02400c46-41e5-4faf-a3f8-050f952b8a10/a7cdf531-5ef4-4b79-8c6a-38a2814974e5.jpg"/>
+  <figcaption>SOMA</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="055cbd7e-764c-421e-931d-4b3e4aea1248.html">
+  <img class="lozad" data-src="055cbd7e-764c-421e-931d-4b3e4aea1248/aedb29bc-b1a4-4025-a315-d4b8110533e3.jpg"/>
+  <figcaption>The Evil Within</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="a44728be-2353-446f-92c5-36c416981e26.html">
+  <img class="lozad" data-src="a44728be-2353-446f-92c5-36c416981e26/608d7f22-c757-48d2-83f0-8e521bb1f8a1.jpg"/>
+  <figcaption>The Lord of the Rings Online</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="ca4c3fc0-a56e-4fef-8d44-a36a52b62ded.html">
+  <img class="lozad" data-src="ca4c3fc0-a56e-4fef-8d44-a36a52b62ded/3d4fa2ca-1f72-4279-86f5-1136af9cd03d.jpg"/>
+  <figcaption>The Outlast Trials</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="e65e7c49-f715-4e7a-8984-931c1bab2a6b.html">
+  <img class="lozad" data-src="e65e7c49-f715-4e7a-8984-931c1bab2a6b/a7ebb679-ef9c-46f3-9205-8f34b2537cf4.jpg"/>
+  <figcaption>The Witcher</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="07c52ae6-1c86-48a7-a484-77a974b221a8.html">
+  <img class="lozad" data-src="07c52ae6-1c86-48a7-a484-77a974b221a8/5cf7592e-3385-4a18-929b-2dd339d3ad58.jpg"/>
+  <figcaption>The Witcher 2: Assassins of Kings</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f9e454f6-db65-4aa1-88e5-0155440c1483.html">
+  <img class="lozad" data-src="f9e454f6-db65-4aa1-88e5-0155440c1483/8710f448-181f-4619-a41a-2b477fcd573b.jpg"/>
+  <figcaption>The Witcher 3: Wild Hunt</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="91d30905-f207-40d6-93d8-acba39870e9e.html">
+  <img class="lozad" data-src="91d30905-f207-40d6-93d8-acba39870e9e/adb8e37b-fb0d-4d8b-8de5-668c266aa1d8.jpg"/>
+  <figcaption>Thronebreaker: The Witcher Tales</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="f7c35f13-1d4d-4356-b4b6-8a1650d42b88.html">
+  <img class="lozad" data-src="f7c35f13-1d4d-4356-b4b6-8a1650d42b88/1f7384a9-b6b8-47c0-abb8-5537b80e6c81.jpg"/>
+  <figcaption>Total War: Attila</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="c31adf6c-a84e-4e58-8e39-570677df5e5a.html">
+  <img class="lozad" data-src="c31adf6c-a84e-4e58-8e39-570677df5e5a/b54edca4-9922-4fcf-b847-e039dd687d40.jpg"/>
+  <figcaption>Total War: Rome II</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="d8f5e7f5-df5f-429d-838e-2ce6fddd80f9.html">
+  <img class="lozad" data-src="d8f5e7f5-df5f-429d-838e-2ce6fddd80f9/599863eb-2feb-46b9-a3f5-e9d5ebe4a30e.jpg"/>
+  <figcaption>Total War: Shogun 2</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="3e5d938a-ef57-4831-aa85-7634240ec791.html">
+  <img class="lozad" data-src="3e5d938a-ef57-4831-aa85-7634240ec791/7abab67f-9db9-4a38-8b03-5ecb21d4c149.jpg"/>
+  <figcaption>Tyranny</figcaption>
+  </a>
+</figure>
+<figure class="card">
+  <a href="0db83f3a-cdcf-4657-b390-37108760e2cf.html">
+  <img class="lozad" data-src="0db83f3a-cdcf-4657-b390-37108760e2cf/2254fec0-6e63-4ae6-aadb-ea5079ecbf0d.jpg"/>
+  <figcaption>World in Conflict</figcaption>
+  </a>
+</figure>
+
+</div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+  <script>
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+    observer.observe();
+    
+	// Get the input field
+	var input = document.getElementById("search");
+
+	// Execute a function when the user releases a key on the keyboard
+	input.addEventListener("keyup", function(event) {
+	  // Number 13 is the "Enter" key on the keyboard
+	  if (event.keyCode === 13) {
+		// Cancel the default action, if needed
+		event.preventDefault();
+		// Trigger the button element with a click
+		document.getElementById("searchbutton").click();
+	  }
+	});
+	
+    //Get the button:
+    mybutton = document.getElementById("BackTopButton");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+	
+	function ShowHide(body_id){
+	var elem
+
+		elem = document.getElementById(body_id);
+		elemclick = document.getElementById("eye-" + body_id);
+		
+		if(!elem) return true;
+		if(!elemclick) return true;
+
+		if (elem.style.display == "none") {
+		  elem.style.display = "";
+		  elemclick.innerHTML = "&#x25BC;";
+		  elemclick.style.color = "#007962";
+		}
+		else {
+		  elem.style.display = "none";
+		  elemclick.innerHTML = "&#x25BA;";
+		  elemclick.style.color = "#790000";
+		}
+		return true;
+	}
+   </script>
+</html>

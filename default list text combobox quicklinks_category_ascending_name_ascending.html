@@ -1,0 +1,1646 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Category</title>
+	<link rel="manifest" href="manifest.webmanifest">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<style>
+h2:after,
+.cards .card:after {
+  position: absolute;
+}
+
+h2,
+h2 strong,
+.cards .card
+{
+  position: relative;
+}
+
+h2,
+h2 strong,
+h2 span {
+  vertical-align: middle;
+}
+
+body {
+  background: #24282f;
+  font-family: 'Arial';
+}
+
+.wrapper {
+  padding: 15px;
+}
+
+h2 {
+  padding: 10px;
+  padding-left: 25px;
+  color: #ccc;
+  margin: 0;
+  cursor:pointer;
+}
+
+h2 strong {
+  z-index: 2;
+  background: #24282f;
+  padding: 4px 8px;
+}
+
+h2 span {
+  font-size: 0.7em;
+  color: #aaa;
+  margin-left: 10px;
+}
+
+h2:after {
+  content: '';
+  z-index: 1;
+  bottom: 50%;
+  margin-bottom: -2px;
+  height: 2px;
+  left: 0;
+  right: 0;
+  background: #373d47;
+}
+
+#h2jscript {
+  cursor:pointer;
+}
+.quicklinks {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.quicklink {
+  margin: 10px;
+}
+
+select#combobselect {
+    background-color:#555;
+    color:#CCC;
+}
+
+#grouplabel {
+   font-size: 20px;
+   color: #CCC;
+}
+
+/* link no underline */
+a {
+  text-decoration: none;
+}
+
+/* unvisited link */
+a:link {
+  color: #CCC;
+}
+/* visited link */
+a:visited {
+  color: #CCC;
+}
+/* mouse over link */
+a:hover {
+  color: #EEE;
+}
+/* selected link */
+a:active {
+  color: #CCC;
+}
+
+.Menu {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#BackTopButton {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+.MenuButton {
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #555;/* Set a background color */
+  color: #ccc; /* Text color */
+  padding: 5px; /* Some padding */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 20px;/* Increase font size */
+  margin-top: 10px;
+  margin-left: 15px;
+  cursor:pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #666; /* Add a dark-grey background on hover */
+  color: #eee; /* Text color */
+}
+
+#BackTopButton:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+#label {
+   font-size: 18px;
+   color: #CCC;
+   margin: 5px;
+}
+
+#label a {
+   color: #CCC;
+}
+
+/* unvisited link */
+#label a:link {
+  color: #CCC;
+}
+/* visited link */
+#label a:visited {
+  color: #CCC;
+}
+/* mouse over link */
+#label a:hover {
+  color: #EEE;
+}
+/* selected link */
+#label a:active {
+  color: #CCC;
+}
+
+	                                                   /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+  vertical-align: middle;                              /* align middle */
+  text-align: left;                                    /* align text left */
+}
+
+.tdname {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+  vertical-align: middle;                              /* align middle */
+  text-align: left;                                    /* align text left */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+  border-collapse: collapse;						   /* to make rows collapse if they are hidden using search */
+  table-layout: fixed;
+}
+
+input{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 300px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 1rem;
+}
+
+input:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+
+#searchbutton{
+  display: block;
+  background: #fff;
+  padding: .6rem;
+  border-radius: 0.3rem;
+  width: 175px;
+  border: 0.1rem solid #BDBDBD;
+  outline: none;
+  height: 2rem;
+}
+
+#searchbutton:hover{
+	border: 0.1rem solid #0F52BA !important;
+}
+  </style>
+  <script>
+	function search() {
+		var input, filter, games, game, i, j, txtValue, fragment, parentElement, wrapper, quicklinks, quicklink, quicklinkid, cards, needhide, numvisible, quicklinklinks, header, quicklinkvalue;
+		input = document.getElementById("search");
+		filter = input.value.toUpperCase();
+		wrapper = document.getElementById("wrapper");
+		parentElement = wrapper.parentElement;
+		fragment = document.createDocumentFragment();
+		fragment.appendChild(wrapper.cloneNode(true));
+		wrapper.remove();
+		games = fragment.childNodes[0].getElementsByClassName("tdname");
+		i = games.length - 1;
+		
+		while (i >= 0 ) {
+			game = games[i];
+			txtValue = game.childNodes[0].innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				game.parentElement.style.display = "";
+			} else {
+				game.parentElement.style.display = "none";
+			}
+			i--;
+		}
+
+		quicklinks = fragment.childNodes[0].querySelectorAll("tr[id^='quicklink-']")
+		i = quicklinks.length - 1;
+		while (i >= 0) {
+			quicklink = quicklinks[i];
+			quicklinkid = quicklink.id;
+			cards = fragment.getElementById(quicklinkid.replace("quicklink-", ""));
+			needhide = true;
+			if(cards)
+			{
+				j = cards.children.length -1
+				numvisible = 0;
+				while (j >= 0)
+				{
+					if (cards.children[j].style.display == "")
+					{
+						needhide = false;
+						numvisible++;
+					}
+					j--;
+				}
+
+				quicklinklinks = fragment.childNodes[0].querySelectorAll("option[value=\"#" + quicklinkid.replace(/["\\]/g, '\\$&') + "\"]")
+				if (needhide)
+				{
+					cards.style.display = "none";
+					quicklink.style.display = "none";
+					quicklink.children[0].children[0].children[0].innerHTML = "&#x25BA;";
+					quicklink.children[0].children[0].children[0].style.color = "#790000";
+					quicklink.children[0].children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )";
+					if (quicklinklinks.length == 1)
+					{						
+						quicklinklinks[0].style.display = "none";
+					}
+				} else {
+					cards.style.display = "";
+					quicklink.style.display = "";
+					quicklink.children[0].children[0].children[0].innerHTML = "&#x25BC;";
+					quicklink.children[0].children[0].children[0].style.color = "#007962";
+					quicklink.children[0].children[0].children[1].children[0].innerText = "( " + numvisible.toString() + " )";
+					if (quicklinklinks.length == 1)
+					{						
+						quicklinklinks[0].style.display = "";
+					}
+				}
+			}
+			i--;
+		}
+
+		parentElement.appendChild(fragment.childNodes[0]);
+
+		//have to renable this
+		const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+		observer.observe();
+
+		var input = document.getElementById("search");
+
+		// Execute a function when the user releases a key on the keyboard
+		input.addEventListener("keyup", function(event) 
+		{
+			// Number 13 is the "Enter" key on the keyboard
+			if (event.keyCode === 13) 
+			{
+				// Cancel the default action, if needed
+				event.preventDefault();
+				// Trigger the button element with a click
+				document.getElementById("searchbutton").click();
+			}
+		});
+	}
+  </script>
+  </head>
+  <body>
+    <button onclick="topFunction()" id="BackTopButton" title="Go to top">Top</button>
+    <div class="wrapper" id="wrapper">
+      <h2><strong>MAIN MENU - Category<span>(Category ascending / Name ascending)</span></strong></h2>
+      <div class="Menu"><a Class="MenuButton" href="index.html">Name ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_releaseyear_descending_name_ascending.html">Release Year ▼</A><a Class="MenuButton" href="default%20list%20text_favorite_ascending_name_ascending.html">Favorite ▲</A><a Class="MenuButton" href="default%20list%20text_completionstatus_ascending_name_ascending.html">Completion Status ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html">User Score ▼</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html">Category ▲</A><a Class="MenuButton" href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html">Release Date ▼</A></div>
+      <h2><strong>Search</strong></h2><input type="text" id="search" placeholder="Type in a game name to search"><br/><button onclick="search()" id="searchbutton">Search</button>
+      <h2><strong>Quick Links</strong></h2>
+      <div class="quicklinks"><P id="grouplabel">Category: <select id="combobselect" onchange="window.location=this.options[this.selectedIndex].value"><option value="#quicklink-None">None (19)</option><option value="#quicklink-2023">2023 (9)</option><option value="#quicklink-2024">2024 (20)</option><option value="#quicklink-2025">2025 (4)</option><option value="#quicklink-Beaten with Evi">Beaten with Evi (8)</option><option value="#quicklink-Play with Evi">Play with Evi (46)</option></select></P></div>
+      <h2></h2>
+      <div class="cards">
+	  <TABLE  name="gamestable" class="detailstable" id="detailstable">
+      <COLGROUP><COL WIDTH="60"><COL WIDTH="22%"><COL WIDTH="13%"><COL WIDTH="13%"><COL WIDTH="13%"><COL WIDTH="13%"><COL WIDTH="13%"><COL WIDTH="13%"></COLGROUP>
+	  <THEAD><TR><TH></TH><TH><B><a href="">Name</a></B></TH><TH><B><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html">Category ▲</a></B></TH><TH><B><a href="">Last Activity</a></B></TH><TH><B><a href="">Added</a></B></TH><TH><B><a href="">Playtime</a></B></TH><TH><B><a href="">Source</a></B></TH><TH><B><a href="">Platform</a></B></TH></TR></THEAD>
+	  <TBODY>
+   	  </TBODY>
+<TBODY> 
+<TR id="quicklink-None"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('None')"><strong id="eye-None" style="color: #007962;">&#x25BC;</strong><strong>None<span>( 19 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="None">
+
+
+<TR>
+	<TD>1.</TD>
+	<TD class="tdname"><a href="f4ee0328-b9bf-467b-a114-421c3564cb38.html">Call of Duty: Black Ops</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:59:37</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>2.</TD>
+	<TD class="tdname"><a href="bc22b628-5239-438b-b881-c26c896a00cc.html">Call of Duty: Black Ops II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:59:47</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>3.</TD>
+	<TD class="tdname"><a href="587954d3-e38e-4d25-a956-5cfeaabe782e.html">Call of Duty: Black Ops III</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:59:54</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>4.</TD>
+	<TD class="tdname"><a href="c8b55542-7a07-4091-b59d-91728e6b72f3.html">Call of Duty: Infinite Warfare</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:03:45</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>5.</TD>
+	<TD class="tdname"><a href="3ee3b8a7-4bdd-41a0-994e-38c155c3c72a.html">Call of Duty: Modern Warfare 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:00:06</TD>
+	<TD><a href="#quicklink-7m 22s">7m 22s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>6.</TD>
+	<TD class="tdname"><a href="ae3bccf4-87cf-497f-adf4-3b1a453c1bb1.html">Call of Duty: Modern Warfare 3</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:00:18</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>7.</TD>
+	<TD class="tdname"><a href="62faa2f5-5b41-4f7e-affa-2ba7a7a093c8.html">Dragon Age: Origins</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:48:52</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>8.</TD>
+	<TD class="tdname"><a href="013d9ff3-d8d7-4bda-9300-0e813565a086.html">Medieval II: Total War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:40:00</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>9.</TD>
+	<TD class="tdname"><a href="b5871b20-4192-4c54-9b05-da6349d0f5d1.html">Napoleon: Total War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:48:44</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>10.</TD>
+	<TD class="tdname"><a href="f5fac8d6-b681-46a3-b430-4b20e0501b44.html">Outlast II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:46:40</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>11.</TD>
+	<TD class="tdname"><a href="36e0bc43-9e81-4b48-9f5c-47ae2dbf5b70.html">pirates of the caribbean online</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-10.12.2024 г.">10.12.2024 г.</a> 10:11:16</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>12.</TD>
+	<TD class="tdname"><a href="324240ed-631b-4d69-9d16-41c854e7bdb6.html">Rome: Total War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:39:25</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>13.</TD>
+	<TD class="tdname"><a href="d3a98efd-3fe9-434c-b6f8-c79f445b48e3.html">S.T.A.L.K.E.R. Collection</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:37:15</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>14.</TD>
+	<TD class="tdname"><a href="419edef2-216b-41db-a73f-fb3d5e50c588.html">SCORN</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:45:17</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>15.</TD>
+	<TD class="tdname"><a href="055cbd7e-764c-421e-931d-4b3e4aea1248.html">The Evil Within</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-3.12.2023 г.">3.12.2023 г.</a> 10:05:50</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>16.</TD>
+	<TD class="tdname"><a href="a44728be-2353-446f-92c5-36c416981e26.html">The Lord of the Rings Online</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-4.12.2023 г.">4.12.2023 г.</a> 10:15:27</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>17.</TD>
+	<TD class="tdname"><a href="f7c35f13-1d4d-4356-b4b6-8a1650d42b88.html">Total War: Attila</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:39:42</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>18.</TD>
+	<TD class="tdname"><a href="c31adf6c-a84e-4e58-8e39-570677df5e5a.html">Total War: Rome II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:40:21</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>19.</TD>
+	<TD class="tdname"><a href="d8f5e7f5-df5f-429d-838e-2ce6fddd80f9.html">Total War: Shogun 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:22:03</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+</TBODY>
+<TBODY> 
+<TR id="quicklink-2023"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('2023')"><strong id="eye-2023" style="color: #007962;">&#x25BC;</strong><strong>2023<span>( 9 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="2023">
+
+
+<TR>
+	<TD>20.</TD>
+	<TD class="tdname"><a href="301a4b1d-0931-4e24-a747-fee53339ef55.html">Amnesia: The Bunker</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-More Than a Year ago">More Than a Year ago</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:37:16</TD>
+	<TD><a href="#quicklink-8h 0m 0s">8h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>21.</TD>
+	<TD class="tdname"><a href="ef0627f8-708d-41e6-9414-6c6a2c80ea98.html">Assassin&#39;s Creed</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:04:42</TD>
+	<TD><a href="#quicklink-10h 46m 55s">10h 46m 55s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>22.</TD>
+	<TD class="tdname"><a href="eb69424c-45b4-412f-a08f-5595f2c41f4d.html">Call of Duty 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:18:36</TD>
+	<TD><a href="#quicklink-8h 0m 0s">8h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>23.</TD>
+	<TD class="tdname"><a href="0832c587-10dc-4a13-905f-9b2a6ce107f0.html">Call of Duty 4: Modern Warfare</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-More Than a Year ago">More Than a Year ago</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:51:49</TD>
+	<TD><a href="#quicklink-9h 7m 41s">9h 7m 41s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>24.</TD>
+	<TD class="tdname"><a href="c0cc33bc-3b8d-4939-97a4-4448dc28653d.html">Call of Duty: World at War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-More Than a Year ago">More Than a Year ago</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:59:25</TD>
+	<TD><a href="#quicklink-3h 51m 4s">3h 51m 4s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>25.</TD>
+	<TD class="tdname"><a href="9b4737b2-44c1-4062-b4d9-a5526574c1b3.html">Call to Arms: Gates of Hell - Ostfront</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:11:14</TD>
+	<TD><a href="#quicklink-4d 6h 22m 15s">4d 6h 22m 15s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>26.</TD>
+	<TD class="tdname"><a href="d56f986c-6155-454f-a52c-876f2de70f95.html">Outlast</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:46:31</TD>
+	<TD><a href="#quicklink-5h 0m 33s">5h 0m 33s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>27.</TD>
+	<TD class="tdname"><a href="1f942940-3908-4d52-b51a-2c75a1618eb4.html">Pentiment</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:46:14</TD>
+	<TD><a href="#quicklink-16h 0m 0s">16h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>28.</TD>
+	<TD class="tdname"><a href="7f8ac379-533a-4039-b4fe-625de6e0000a.html">Soldiers: Heroes of World War II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2023">2023</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:19:24</TD>
+	<TD><a href="#quicklink-1d 1h 0m 0s">1d 1h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+</TBODY>
+<TBODY> 
+<TR id="quicklink-2024"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('2024')"><strong id="eye-2024" style="color: #007962;">&#x25BC;</strong><strong>2024<span>( 20 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="2024">
+
+
+<TR>
+	<TD>29.</TD>
+	<TD class="tdname"><a href="fea84536-1f44-449c-a1c8-fdd6a481fce3.html">Arma 3</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:38:38</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>30.</TD>
+	<TD class="tdname"><a href="ef0627f8-708d-41e6-9414-6c6a2c80ea98.html">Assassin&#39;s Creed</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:04:42</TD>
+	<TD><a href="#quicklink-10h 46m 55s">10h 46m 55s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>31.</TD>
+	<TD class="tdname"><a href="a037b8d7-4c62-4c03-be62-4649617723e3.html">Assassin&#39;s Creed II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Week">Past Week</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:05:13</TD>
+	<TD><a href="#quicklink-12h 41m 17s">12h 41m 17s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>32.</TD>
+	<TD class="tdname"><a href="ff7517d6-557f-4294-9105-a5e3819a0429.html">Baba is You</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.1.2024 г.">2.1.2024 г.</a> 9:18:00</TD>
+	<TD><a href="#quicklink-1h 55m 43s">1h 55m 43s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>33.</TD>
+	<TD class="tdname"><a href="9b4737b2-44c1-4062-b4d9-a5526574c1b3.html">Call to Arms: Gates of Hell - Ostfront</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:11:14</TD>
+	<TD><a href="#quicklink-4d 6h 22m 15s">4d 6h 22m 15s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>34.</TD>
+	<TD class="tdname"><a href="52548794-46c0-4c92-90e2-55de7b075e7d.html">Cyberpunk 2077</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:47:53</TD>
+	<TD><a href="#quicklink-5d 9h 7m 14s">5d 9h 7m 14s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>35.</TD>
+	<TD class="tdname"><a href="5302cece-ccde-46ad-9c4c-45a1c8ab2e5e.html">Demon&#39;s Souls</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-4.12.2023 г.">4.12.2023 г.</a> 10:45:13</TD>
+	<TD><a href="#quicklink-16h 52m 14s">16h 52m 14s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>36.</TD>
+	<TD class="tdname"><a href="7c674148-b4bb-4a84-8a80-6b51e58a387b.html">Ghost of Tsushima</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-17.5.2024 г.">17.5.2024 г.</a> 9:12:11</TD>
+	<TD><a href="#quicklink-1d 7h 6m 32s">1d 7h 6m 32s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>37.</TD>
+	<TD class="tdname"><a href="ffc5cfd4-3585-460e-b7c7-83dfef31ac52.html">God of War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:22</TD>
+	<TD><a href="#quicklink-9h 33m 41s">9h 33m 41s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>38.</TD>
+	<TD class="tdname"><a href="e2614c93-6ab0-47c4-869a-2f5ce07a08be.html">God of War II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:38</TD>
+	<TD><a href="#quicklink-9h 16m 0s">9h 16m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>39.</TD>
+	<TD class="tdname"><a href="76562ef9-8d42-4579-b738-796fa37d9455.html">God of War: Chains of Olympus</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:59</TD>
+	<TD><a href="#quicklink-4h 10m 0s">4h 10m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a></TD>
+</TR>
+
+<TR>
+	<TD>40.</TD>
+	<TD class="tdname"><a href="6cc309e2-1217-4e10-8553-a6e8b36734b6.html">Jusant</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-20.12.2023 г.">20.12.2023 г.</a> 22:37:03</TD>
+	<TD><a href="#quicklink-4h 38m 24s">4h 38m 24s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>41.</TD>
+	<TD class="tdname"><a href="62e19244-a7e5-471e-93fa-d056229e03c6.html">Mount &amp; Blade: Warband</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:21:44</TD>
+	<TD><a href="#quicklink-4h 58m 6s">4h 58m 6s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>42.</TD>
+	<TD class="tdname"><a href="cef241ba-26a1-46ca-adfa-ec28b3db2bd1.html">Portal</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:42:56</TD>
+	<TD><a href="#quicklink-5h 0m 56s">5h 0m 56s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>43.</TD>
+	<TD class="tdname"><a href="a40934ff-5b15-4a5a-b599-e341ad0107c6.html">Shadow of the Colossus</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:44:59</TD>
+	<TD><a href="#quicklink-7h 17m 0s">7h 17m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>44.</TD>
+	<TD class="tdname"><a href="02400c46-41e5-4faf-a3f8-050f952b8a10.html">SOMA</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:38:17</TD>
+	<TD><a href="#quicklink-8h 57m 38s">8h 57m 38s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>45.</TD>
+	<TD class="tdname"><a href="ca4c3fc0-a56e-4fef-8d44-a36a52b62ded.html">The Outlast Trials</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-4.12.2023 г.">4.12.2023 г.</a> 10:51:44</TD>
+	<TD><a href="#quicklink-2d 23h 36m 0s">2d 23h 36m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>46.</TD>
+	<TD class="tdname"><a href="e65e7c49-f715-4e7a-8984-931c1bab2a6b.html">The Witcher</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:26</TD>
+	<TD><a href="#quicklink-6h 46m 3s">6h 46m 3s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>47.</TD>
+	<TD class="tdname"><a href="f9e454f6-db65-4aa1-88e5-0155440c1483.html">The Witcher 3: Wild Hunt</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:41</TD>
+	<TD><a href="#quicklink-10h 52m 8s">10h 52m 8s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>48.</TD>
+	<TD class="tdname"><a href="0db83f3a-cdcf-4657-b390-37108760e2cf.html">World in Conflict</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2024">2024</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:22:25</TD>
+	<TD><a href="#quicklink-1h 49m 21s">1h 49m 21s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+</TBODY>
+<TBODY> 
+<TR id="quicklink-2025"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('2025')"><strong id="eye-2025" style="color: #007962;">&#x25BC;</strong><strong>2025<span>( 4 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="2025">
+
+
+<TR>
+	<TD>49.</TD>
+	<TD class="tdname"><a href="2ce985fc-7490-425e-b7c6-fb062536392a.html">Derail Valley</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2025">2025</a></TD>
+	<TD><a href="#quicklink-Past Week">Past Week</a></TD>
+	<TD><a href="#quicklink-24.12.2023 г.">24.12.2023 г.</a> 13:52:48</TD>
+	<TD><a href="#quicklink-3h 27m 58s">3h 27m 58s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>50.</TD>
+	<TD class="tdname"><a href="b5a86cfe-2cfd-4e12-917e-a5b2f67b7c40.html">Euro Truck Simulator 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2025">2025</a></TD>
+	<TD><a href="#quicklink-Today">Today</a></TD>
+	<TD><a href="#quicklink-29.10.2024 г.">29.10.2024 г.</a> 17:40:23</TD>
+	<TD><a href="#quicklink-6h 27m 5s">6h 27m 5s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>51.</TD>
+	<TD class="tdname"><a href="a2025fb0-2aa3-4643-9da4-fdf4881ae8e3.html">Slay the Princess: The Pristine Cut</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2025">2025</a></TD>
+	<TD><a href="#quicklink-Past Week">Past Week</a></TD>
+	<TD><a href="#quicklink-18.12.2023 г.">18.12.2023 г.</a> 9:05:02</TD>
+	<TD><a href="#quicklink-2h 3m 47s">2h 3m 47s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>52.</TD>
+	<TD class="tdname"><a href="91d30905-f207-40d6-93d8-acba39870e9e.html">Thronebreaker: The Witcher Tales</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-2025">2025</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:44</TD>
+	<TD><a href="#quicklink-1h 31m 53s">1h 31m 53s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+</TBODY>
+<TBODY> 
+<TR id="quicklink-Beaten with Evi"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('Beaten with Evi')"><strong id="eye-Beaten with Evi" style="color: #007962;">&#x25BC;</strong><strong>Beaten with Evi<span>( 8 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="Beaten with Evi">
+
+
+<TR>
+	<TD>53.</TD>
+	<TD class="tdname"><a href="301a4b1d-0931-4e24-a747-fee53339ef55.html">Amnesia: The Bunker</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-More Than a Year ago">More Than a Year ago</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:37:16</TD>
+	<TD><a href="#quicklink-8h 0m 0s">8h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>54.</TD>
+	<TD class="tdname"><a href="ffc5cfd4-3585-460e-b7c7-83dfef31ac52.html">God of War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:22</TD>
+	<TD><a href="#quicklink-9h 33m 41s">9h 33m 41s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>55.</TD>
+	<TD class="tdname"><a href="e2614c93-6ab0-47c4-869a-2f5ce07a08be.html">God of War II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:38</TD>
+	<TD><a href="#quicklink-9h 16m 0s">9h 16m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>56.</TD>
+	<TD class="tdname"><a href="76562ef9-8d42-4579-b738-796fa37d9455.html">God of War: Chains of Olympus</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:16:59</TD>
+	<TD><a href="#quicklink-4h 10m 0s">4h 10m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a></TD>
+</TR>
+
+<TR>
+	<TD>57.</TD>
+	<TD class="tdname"><a href="a28423e0-1521-42a2-917d-571587df0144.html">LoveChoice</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-3.12.2023 г.">3.12.2023 г.</a> 23:19:17</TD>
+	<TD><a href="#quicklink-2h 0m 0s">2h 0m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>58.</TD>
+	<TD class="tdname"><a href="cef241ba-26a1-46ca-adfa-ec28b3db2bd1.html">Portal</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:42:56</TD>
+	<TD><a href="#quicklink-5h 0m 56s">5h 0m 56s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>59.</TD>
+	<TD class="tdname"><a href="a40934ff-5b15-4a5a-b599-e341ad0107c6.html">Shadow of the Colossus</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:44:59</TD>
+	<TD><a href="#quicklink-7h 17m 0s">7h 17m 0s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>60.</TD>
+	<TD class="tdname"><a href="02400c46-41e5-4faf-a3f8-050f952b8a10.html">SOMA</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Beaten with Evi">Beaten with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:38:17</TD>
+	<TD><a href="#quicklink-8h 57m 38s">8h 57m 38s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+</TBODY>
+<TBODY> 
+<TR id="quicklink-Play with Evi"><TH colspan="8"><h2 id="h2jscript" onclick="ShowHide('Play with Evi')"><strong id="eye-Play with Evi" style="color: #007962;">&#x25BC;</strong><strong>Play with Evi<span>( 46 )</span></strong></h2></TH></TR>
+</TBODY>
+<TBODY id="Play with Evi">
+
+
+<TR>
+	<TD>61.</TD>
+	<TD class="tdname"><a href="83981b02-7a1d-496d-a395-bb8f6220604d.html">Amnesia: A Machine for Pigs</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:36:26</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>62.</TD>
+	<TD class="tdname"><a href="6f7dfb4e-06fc-4583-8f3b-c286d5a62554.html">Amnesia: Rebirth</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:37:06</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>63.</TD>
+	<TD class="tdname"><a href="9a89fba6-ab52-4cff-88da-7d7291eb9d2a.html">Amnesia: The Dark Descent</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:58:37</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>64.</TD>
+	<TD class="tdname"><a href="9c3477a3-c963-48b9-8f87-af8f8ec2150c.html">Assassin&#39;s Creed Brotherhood</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:05:23</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>65.</TD>
+	<TD class="tdname"><a href="a037b8d7-4c62-4c03-be62-4649617723e3.html">Assassin&#39;s Creed II</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Week">Past Week</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:05:13</TD>
+	<TD><a href="#quicklink-12h 41m 17s">12h 41m 17s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>66.</TD>
+	<TD class="tdname"><a href="712594bc-6419-42be-8886-b5efd714b226.html">Assassin&#39;s Creed III</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:05:58</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>67.</TD>
+	<TD class="tdname"><a href="563579cd-4662-4144-8833-b53eef539718.html">Assassin&#39;s Creed IV Black Flag</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:06:07</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>68.</TD>
+	<TD class="tdname"><a href="6cf7dfad-1bb6-4155-94b0-993bf0d0bc58.html">Assassin&#39;s Creed Origins</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:07:00</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>69.</TD>
+	<TD class="tdname"><a href="a1b7e0c9-5cad-492b-aa16-7456f5fdcdc1.html">Assassin&#39;s Creed Revelations</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:05:40</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>70.</TD>
+	<TD class="tdname"><a href="26b657f9-0d79-4dc2-aba4-78f7acfe7e45.html">Assassin&#39;s Creed Rogue</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:06:24</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>71.</TD>
+	<TD class="tdname"><a href="ff7517d6-557f-4294-9105-a5e3819a0429.html">Baba is You</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.1.2024 г.">2.1.2024 г.</a> 9:18:00</TD>
+	<TD><a href="#quicklink-1h 55m 43s">1h 55m 43s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>72.</TD>
+	<TD class="tdname"><a href="06691aaa-9376-4f98-ae2e-95ad390060fc.html">Beyond Good &amp; Evil</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-More Than a Year ago">More Than a Year ago</a></TD>
+	<TD><a href="#quicklink-3.12.2023 г.">3.12.2023 г.</a> 9:56:34</TD>
+	<TD><a href="#quicklink-16s">16s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>73.</TD>
+	<TD class="tdname"><a href="1c509772-6337-4e8f-a1ab-2ad00c339653.html">Call of the Sea</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:47:45</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>74.</TD>
+	<TD class="tdname"><a href="c989b6ce-2b26-471b-b0a2-ca2d8437eccf.html">Detroit: Become Human</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:48:06</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>75.</TD>
+	<TD class="tdname"><a href="83889b13-e916-4f6c-8ea6-c4cc8fc2a716.html">Dishonored</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:48:16</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>76.</TD>
+	<TD class="tdname"><a href="49a6f469-d63b-4f0d-a1a0-8b97952b6b46.html">Dishonored 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:48:25</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>77.</TD>
+	<TD class="tdname"><a href="5fdbb9fe-3133-449c-a8f7-df177592bed4.html">Dishonored: Death of the Outsider</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:48:33</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>78.</TD>
+	<TD class="tdname"><a href="7c674148-b4bb-4a84-8a80-6b51e58a387b.html">Ghost of Tsushima</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-17.5.2024 г.">17.5.2024 г.</a> 9:12:11</TD>
+	<TD><a href="#quicklink-1d 7h 6m 32s">1d 7h 6m 32s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>79.</TD>
+	<TD class="tdname"><a href="2c498945-0913-4bbd-9dba-b97513effdb9.html">God of War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:18:27</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>80.</TD>
+	<TD class="tdname"><a href="35ed00c6-3757-4345-8d09-3ee7031bb4a2.html">God of War III</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:17:13</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 3">Sony PlayStation 3</a></TD>
+</TR>
+
+<TR>
+	<TD>81.</TD>
+	<TD class="tdname"><a href="077f2e81-0c39-4278-8463-ce78293b351e.html">God of War: Ascension</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:18:12</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 3">Sony PlayStation 3</a></TD>
+</TR>
+
+<TR>
+	<TD>82.</TD>
+	<TD class="tdname"><a href="6e3e9167-8911-4e7c-93e1-2e666e476abc.html">God of War: Ghost of Sparta</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:17:29</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation Portable">Sony PlayStation Portable</a></TD>
+</TR>
+
+<TR>
+	<TD>83.</TD>
+	<TD class="tdname"><a href="ab556156-5874-452f-ad52-ec1bba3da899.html">Hitman 2: Silent Assassin</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:10:03</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>84.</TD>
+	<TD class="tdname"><a href="959ef2ae-cb8b-47c0-8087-fc9a82473731.html">Hitman World of Assassination</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:11:01</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>85.</TD>
+	<TD class="tdname"><a href="3ba52599-6d9c-4e6c-9f2f-47ed54e67860.html">Hitman: Absolution</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:10:49</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>86.</TD>
+	<TD class="tdname"><a href="d5a32ad1-2d96-4df7-9409-8eb85decaa91.html">Hitman: Blood Money</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:10:36</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>87.</TD>
+	<TD class="tdname"><a href="7c0911b7-fcfb-4cf9-b8d1-b440b1b8cbb5.html">Hitman: Codename 47</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:09:51</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>88.</TD>
+	<TD class="tdname"><a href="1606274a-f4dd-4908-9c03-f9876ed8033d.html">Hitman: Contracts</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:10:19</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>89.</TD>
+	<TD class="tdname"><a href="7d184380-daf8-4f8a-a9f2-4f9b13ef8b3e.html">Mass Effect Legendary Edition</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 17:28:59</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>90.</TD>
+	<TD class="tdname"><a href="4d0889e1-2412-43bf-a7f9-bcc73c8a4267.html">Metal Gear Solid 3: Snake Eater</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 9:55:05</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-Sony PlayStation 2">Sony PlayStation 2</a></TD>
+</TR>
+
+<TR>
+	<TD>91.</TD>
+	<TD class="tdname"><a href="459187e7-ab64-4094-9f06-ce2ff3ce8de5.html">Middle-earth: Shadow of Mordor</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:49:05</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>92.</TD>
+	<TD class="tdname"><a href="3350dcac-bc3d-4c88-a071-33bd65115685.html">Middle-earth: Shadow of War</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:49:13</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>93.</TD>
+	<TD class="tdname"><a href="6e307735-13d8-425e-b6c7-38a9a1cbbef4.html">Resident Evil</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:50:41</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>94.</TD>
+	<TD class="tdname"><a href="c2ca6b20-5838-446c-ad3d-a4b8b86588ee.html">Resident Evil 0</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:53:16</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>95.</TD>
+	<TD class="tdname"><a href="d2f446b8-ca5d-4f79-8c78-b3c19457fdc0.html">Resident Evil 2</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:52:38</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>96.</TD>
+	<TD class="tdname"><a href="d4eabf1c-0ecb-4ea4-825c-ce801f731a35.html">Resident Evil 4</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:54:10</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>97.</TD>
+	<TD class="tdname"><a href="2dea2748-d094-47c7-94a0-52c4bb6b42e8.html">Resident Evil 5</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:54:34</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>98.</TD>
+	<TD class="tdname"><a href="343a92f1-8e81-4aa5-90e4-fc5254fdef35.html">Resident Evil 6</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:55:45</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>99.</TD>
+	<TD class="tdname"><a href="abf5aa7b-b277-4cd7-a777-9ada205c3131.html">Resident Evil 7: Biohazard</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:55:57</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>100.</TD>
+	<TD class="tdname"><a href="66b2f7b9-a23b-4f3e-a618-d648acc7bf53.html">Resident Evil Village</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:56:13</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>101.</TD>
+	<TD class="tdname"><a href="df55ab78-e80a-4fdf-90a4-e68ae7f59105.html">RiME</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-18.5.2024 г.">18.5.2024 г.</a> 10:31:54</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>102.</TD>
+	<TD class="tdname"><a href="e65e7c49-f715-4e7a-8984-931c1bab2a6b.html">The Witcher</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:26</TD>
+	<TD><a href="#quicklink-6h 46m 3s">6h 46m 3s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>103.</TD>
+	<TD class="tdname"><a href="07c52ae6-1c86-48a7-a484-77a974b221a8.html">The Witcher 2: Assassins of Kings</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:34</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>104.</TD>
+	<TD class="tdname"><a href="f9e454f6-db65-4aa1-88e5-0155440c1483.html">The Witcher 3: Wild Hunt</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:41</TD>
+	<TD><a href="#quicklink-10h 52m 8s">10h 52m 8s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>105.</TD>
+	<TD class="tdname"><a href="91d30905-f207-40d6-93d8-acba39870e9e.html">Thronebreaker: The Witcher Tales</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Past Year">Past Year</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:41:44</TD>
+	<TD><a href="#quicklink-1h 31m 53s">1h 31m 53s</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+<TR>
+	<TD>106.</TD>
+	<TD class="tdname"><a href="3e5d938a-ef57-4831-aa85-7634240ec791.html">Tyranny</a></TD>
+	<TD><a href="default%20list%20text%20combobox%20quicklinks_category_ascending_name_ascending.html#quicklink-Play with Evi">Play with Evi</a></TD>
+	<TD><a href="#quicklink-Never">Never</a></TD>
+	<TD><a href="#quicklink-2.12.2023 г.">2.12.2023 г.</a> 16:39:02</TD>
+	<TD><a href="#quicklink-Not Played">Not Played</a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+	<TD><a href="#quicklink-"></a></TD>
+</TR>
+
+
+
+	  </TBODY>
+	  </TABLE>
+      </div>
+    </div>
+	<script>
+
+	// Get the input field
+	var input = document.getElementById("search");
+
+	// Execute a function when the user releases a key on the keyboard
+	input.addEventListener("keyup", function(event) {
+	  // Number 13 is the "Enter" key on the keyboard
+	  if (event.keyCode === 13) {
+		// Cancel the default action, if needed
+		event.preventDefault();
+		// Trigger the button element with a click
+		document.getElementById("searchbutton").click();
+	  }
+	});
+
+	//Get the button:
+	mybutton = document.getElementById("BackTopButton");
+
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+	  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+		mybutton.style.display = "block";
+	  } else {
+		mybutton.style.display = "none";
+	  }
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	function topFunction() {
+	  document.body.scrollTop = 0; // For Safari
+	  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	}
+
+	function ShowHide(body_id){
+	var elem
+
+		elem = document.getElementById(body_id);
+		elemclick = document.getElementById("eye-" + body_id);
+		
+		if(!elem) return true;
+		if(!elemclick) return true;
+
+		if (elem.style.display == "none") {
+		  elem.style.display = "";
+		  elemclick.innerHTML = "&#x25BC;";
+		  elemclick.style.color = "#007962";
+		}
+		else
+		{
+		  elem.style.display = "none";
+		  elemclick.innerHTML = "&#x25BA;";
+		  elemclick.style.color = "#790000";
+		}
+		return true;
+	}
+   </script>
+  </body>
+</html>
